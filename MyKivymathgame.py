@@ -6,7 +6,9 @@ from kivy.uix.textinput import TextInput
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty
 
 class MathGame(BoxLayout):
-    pass
+    score = NumericProperty(0)
+    question = StringProperty("Press Start to Begin")
+    game_active = BooleanProperty(False)
 class MathGameApp(App):
     def build(self):
         return MathGame()
