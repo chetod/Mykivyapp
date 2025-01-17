@@ -12,3 +12,9 @@
         text: root.question
         font_size: '18sp'
     
+    TextInput:
+        id: answer_input
+        multiline: False
+        hint_text: 'Enter your answer'
+        size_hint: (0.8, 0.1)
+        on_text_validate: root.check_answer(self.text)
