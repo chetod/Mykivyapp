@@ -1,3 +1,4 @@
+import random
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -12,7 +13,8 @@ class MathGame(BoxLayout):
 
     def start_game(self):
         self.game_active = True
-        self.question = "Game Started! Prepare for the first question."
+        self.generate_question()
+    
     def check_answer(self, answer_text):
         
         self.question = "This is where the answer will be checked."
@@ -25,6 +27,11 @@ class MathGame(BoxLayout):
         self.score = 0
         self.game_active = False
         self.question = "Press Start to Begin"
+    def generate_question(self):
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 10)
+        self.current_answer = num1 + num2
+        self.question = f"{num1} + {num2} = ?"
 
 class MathGameApp(App):
     def build(self):

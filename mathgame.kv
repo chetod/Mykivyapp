@@ -37,3 +37,18 @@
             text: 'Settings'
             size_hint: (0.4, 0.1)
             on_press: root.show_settings()
+    
+    # ปุ่ม Reset
+    BoxLayout:
+        size_hint: (1, 0.2)
+        spacing: 10
+
+        Button:
+            text: 'Reset'
+            size_hint: (0.4, 0.1)
+            on_press: root.reset_game()
+
+        Button:
+            text: 'Exit'
+            size_hint: (0.4, 0.1)
+            on_press: app.stop()
