@@ -2,19 +2,38 @@
     orientation: 'vertical'
     padding: 10
     spacing: 10
+
+    # หัวข้อเกม
     Label:
         text: 'Math Game'
         font_size: '24sp'
         color: (1, 1, 1, 1)
-    
+
+    # แสดงคำถาม
     Label:
         id: question_label
         text: root.question
         font_size: '18sp'
-    
+
+    # ฟิลด์กรอกคำตอบ
     TextInput:
         id: answer_input
         multiline: False
         hint_text: 'Enter your answer'
         size_hint: (0.8, 0.1)
         on_text_validate: root.check_answer(self.text)
+
+    # ปุ่มสำหรับควบคุม
+    BoxLayout:
+        size_hint: (1, 0.2)
+        spacing: 10
+
+        Button:
+            text: 'Start Game'
+            size_hint: (0.4, 0.1)
+            on_press: root.start_game()
+
+        Button:
+            text: 'Settings'
+            size_hint: (0.4, 0.1)
+            on_press: root.show_settings()
