@@ -18,11 +18,28 @@
         bold: True
         color: 0.9, 0.9, 0.9, 1  # Light text
     # แสดงคำถาม
+    # Question display
     Label:
-        id: question_label
         text: root.question
-        font_size: '18sp'
+        font_size: '24sp'
+        size_hint_y: None
+        height: '100dp'
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        color: 0.9, 0.9, 0.9, 1
+    # Score and Timer
+    BoxLayout:
+        size_hint_y: None
+        height: '40dp'
+        spacing: 20
+        padding: [20, 0]
 
+        Label:
+            text: 'Time: ' + str(root.timer)
+            color: 1, 0.8, 0.2, 1  # Golden yellow
+            bold: True
+            font_size: '20sp'
     # ฟิลด์กรอกคำตอบ
     TextInput:
         id: answer_input

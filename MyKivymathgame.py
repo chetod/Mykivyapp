@@ -5,16 +5,17 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty
-
+from kivy.clock import Clock
 class MathGame(BoxLayout):
     score = NumericProperty(0)
+    timer = NumericProperty(60)
     question = StringProperty("Press Start to Begin")
     game_active = BooleanProperty(False)
 
     def start_game(self):
         self.game_active = True
         self.generate_question()
-    
+        Clock.schedule_interval(self.update_timer, 1)
     
     def check_answer(self, answer_text):
         
@@ -33,7 +34,12 @@ class MathGame(BoxLayout):
         num2 = random.randint(1, 10)
         self.current_answer = num1 + num2
         self.question = f"{num1} + {num2} = ?"
-
+    def update_timer(self, dt):
+        """Update the timer"""
+        if self.game_active:
+            self.timer -= 1
+            if self.timer <= 0:
+                self.end_game()
 class MathGameApp(App):
     def build(self):
         return MathGame()
