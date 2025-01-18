@@ -15,6 +15,7 @@ class MathGame(BoxLayout):
         self.game_active = True
         self.generate_question()
     
+    
     def check_answer(self, answer_text):
         
         self.question = "This is where the answer will be checked."
