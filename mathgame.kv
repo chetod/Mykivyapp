@@ -41,12 +41,22 @@
             bold: True
             font_size: '20sp'
     # ฟิลด์กรอกคำตอบ
-    TextInput:
-        id: answer_input
-        multiline: False
-        hint_text: 'Enter your answer'
-        size_hint: (0.8, 0.1)
-        on_text_validate: root.check_answer(self.text)
+    # Answer input
+    BoxLayout:
+        size_hint_y: None
+        height: '50dp'
+        padding: [40, 0]
+        
+        TextInput:
+            id: answer_input
+            multiline: False
+            font_size: '24sp'
+            hint_text: 'Enter your answer'
+            on_text_validate: root.check_answer(self.text)
+            background_color: 0.2, 0.2, 0.2, 1
+            foreground_color: 0.9, 0.9, 0.9, 1
+            padding: [10, 10]
+            cursor_color: 0.9, 0.9, 0.9, 1
 
     # ปุ่มสำหรับควบคุม
     BoxLayout:
