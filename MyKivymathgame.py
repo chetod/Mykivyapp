@@ -16,19 +16,27 @@ class MathGame(BoxLayout):
         self.game_active = True
         self.generate_question()
         Clock.schedule_interval(self.update_timer, 1)
+        current_answer = None
     
     def check_answer(self, answer_text):
         
-        self.question = "This is where the answer will be checked."
+        """Check the answer"""
+        if not self.game_active:
+            return
 
     def show_settings(self):
         
         print("Settings button clicked!")
 
     def reset_game(self):
+        """Reset the game"""
         self.score = 0
-        self.game_active = False
-        self.question = "Press Start to Begin"
+        self.timer = self.initial_time
+        self.stack = []
+        if hasattr(self, 'ids') and 'answer_input' in self.ids:
+            self.ids.answer_input.text = ""
+            self.ids.status_label.text = ""
+        self.start_game()
     def generate_question(self):
         num1 = random.randint(1, 10)
         num2 = random.randint(1, 10)
