@@ -28,7 +28,9 @@ class MathGame(BoxLayout):
                 self.score += 1
                 self.ids.status_label.text = "Correct!"
                 self.ids.status_label.color = (0, 1, 0, 1)  # Green
-
+        else:
+                self.ids.status_label.text = f"Wrong! The correct answer was {self.current_answer}"
+                self.ids.status_label.color = (1, 0, 0, 1)  # Red
         
     
     def show_settings(self):
