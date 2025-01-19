@@ -23,7 +23,14 @@ class MathGame(BoxLayout):
         """Check the answer"""
         if not self.game_active:
             return
+        user_answer = int(answer_text)
+        if user_answer == self.current_answer:
+                self.score += 1
+                self.ids.status_label.text = "Correct!"
+                self.ids.status_label.color = (0, 1, 0, 1)  # Green
 
+        
+    
     def show_settings(self):
         
         print("Settings button clicked!")

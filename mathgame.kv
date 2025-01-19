@@ -72,8 +72,14 @@
             text: 'Settings'
             size_hint: (0.4, 0.1)
             on_press: root.show_settings()
-    
+    # Status message
+    Label:
+        id: status_label
+        size_hint_y: None
+        height: '40dp'
+        font_size: '18sp'
     # ปุ่ม Reset
+    
     BoxLayout:
         size_hint: (1, 0.2)
         spacing: 10
