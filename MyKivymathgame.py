@@ -11,12 +11,13 @@ class MathGame(BoxLayout):
     timer = NumericProperty(60)
     question = StringProperty("Press Start to Begin")
     game_active = BooleanProperty(False)
-
+    current_answer = None
+    
     def start_game(self):
         self.game_active = True
         self.generate_question()
         Clock.schedule_interval(self.update_timer, 1)
-        current_answer = None
+        
     
     def check_answer(self, answer_text):
         """Check the answer"""
@@ -52,6 +53,14 @@ class MathGame(BoxLayout):
             self.ids.answer_input.text = ""
             self.ids.status_label.text = ""
         self.start_game()
+    
+    def end_game(self):
+        """End the game"""
+        self.game_active = False
+        Clock.unschedule(self.update_timer)
+        self.question = f"Game Over! Final Score: {self.score}"
+        self.ids.status_label.text = "Press Reset to play again"
+        self.ids.status_label.color = (1, 1, 1, 1)
     
     def generate_question(self):
         num1 = random.randint(1, 10)

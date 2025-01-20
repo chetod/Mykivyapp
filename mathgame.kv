@@ -88,15 +88,18 @@
     
     # ปุ่ม Reset
     BoxLayout:
-        size_hint: (1, 0.2)
-        spacing: 10
-
+        size_hint_y: None
+        height: '50dp'
+        spacing: 20
+        padding: [20, 0]
         Button:
-            text: 'Reset'
-            size_hint: (0.4, 0.1)
+            text: 'Reset Game'
             on_press: root.reset_game()
+            background_color: 0.2, 0.7, 0.2, 1  # Green
+            font_size: '18sp'
 
         Button:
             text: 'Exit'
-            size_hint: (0.4, 0.1)
-            on_press: app.stop()
+            on_press: root.exit_game(self)
+            background_color: 0.8, 0.2, 0.2, 1  # Red
+            font_size: '18sp'
