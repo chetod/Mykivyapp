@@ -2,6 +2,7 @@ import random
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.properties import NumericProperty, StringProperty, BooleanProperty
@@ -12,13 +13,52 @@ class MathGame(BoxLayout):
     question = StringProperty("Press Start to Begin")
     game_active = BooleanProperty(False)
     current_answer = None
+
+    def __init__(self, **kwargs):
+        super(MathGame, self).__init__(**kwargs)
+        self.initial_time = 60
     
     def start_game(self):
         self.game_active = True
         self.generate_question()
         Clock.schedule_interval(self.update_timer, 1)
+
+    def show_exit_confirmation(self):
+        """Show confirmation popup before exiting"""
+        content = BoxLayout(orientation='vertical', padding=10, spacing=10)
+        content.add_widget(Label(text='Are you sure you want to exit?'))
         
-    
+        buttons = BoxLayout(size_hint_y=None, height=40, spacing=10)
+        
+        popup = Popup(title='Confirm Exit', 
+                     content=content,
+                     size_hint=(0.6, 0.3),
+                     auto_dismiss=False)
+        
+        def confirm_exit(instance):
+            App.get_running_app().stop()
+            
+        def cancel_exit(instance):
+            popup.dismiss()
+            
+        yes_button = Button(text='Yes')
+        no_button = Button(text='No')
+        
+        yes_button.bind(on_press=confirm_exit)
+        no_button.bind(on_press=cancel_exit)
+        
+        buttons.add_widget(yes_button)
+        buttons.add_widget(no_button)
+        content.add_widget(buttons)
+        
+        popup.open()
+
+    def exit_game(self, instance):
+        if self.game_active:
+            self.show_exit_confirmation()
+        else:
+            App.get_running_app().stop()
+
     def check_answer(self, answer_text):
         """Check the answer"""
         if not self.game_active:
