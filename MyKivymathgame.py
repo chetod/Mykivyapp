@@ -19,19 +19,25 @@ class MathGame(BoxLayout):
         current_answer = None
     
     def check_answer(self, answer_text):
-        
         """Check the answer"""
         if not self.game_active:
             return
-        user_answer = int(answer_text)
-        if user_answer == self.current_answer:
+
+        try:
+            user_answer = int(answer_text)
+            if user_answer == self.current_answer:
                 self.score += 1
                 self.ids.status_label.text = "Correct!"
                 self.ids.status_label.color = (0, 1, 0, 1)  # Green
-        else:
+            else:
                 self.ids.status_label.text = f"Wrong! The correct answer was {self.current_answer}"
                 self.ids.status_label.color = (1, 0, 0, 1)  # Red
-        
+        except ValueError:
+            self.ids.status_label.text = "Please enter a valid number!"
+            self.ids.status_label.color = (1, 0, 0, 1)
+            return
+        self.ids.answer_input.text = ""
+        self.generate_question()
     
     def show_settings(self):
         
@@ -46,17 +52,20 @@ class MathGame(BoxLayout):
             self.ids.answer_input.text = ""
             self.ids.status_label.text = ""
         self.start_game()
+    
     def generate_question(self):
         num1 = random.randint(1, 10)
         num2 = random.randint(1, 10)
         self.current_answer = num1 + num2
         self.question = f"{num1} + {num2} = ?"
+    
     def update_timer(self, dt):
         """Update the timer"""
         if self.game_active:
             self.timer -= 1
             if self.timer <= 0:
                 self.end_game()
+
 class MathGameApp(App):
     def build(self):
         return MathGame()
